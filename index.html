@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Heirloom Calculator — Gold Appreciation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="site-header">
+      <div class="header-ornament">&#10022;</div>
+      <h1 class="site-title">The Heirloom Calculator</h1>
+      <p class="site-subtitle">How gold endures — a study in lasting value</p>
+      <div class="header-rule"></div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+      <!-- KPI Strip -->
+      <div class="kpi-strip" id="kpiStrip">
+        <div class="kpi-card">
+          <span class="kpi-label">Selected Period</span>
+          <span class="kpi-value" id="kpiPeriod">—</span>
+        </div>
+        <div class="kpi-card kpi-card--accent">
+          <span class="kpi-label">Total Appreciation</span>
+          <span class="kpi-value" id="kpiGain">—</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Price at Start</span>
+          <span class="kpi-value" id="kpiStart">—</span>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-label">Price at End</span>
+          <span class="kpi-value" id="kpiEnd">—</span>
+        </div>
+      </div>
+
+      <!-- Chart Container -->
+      <div class="chart-shell">
+        <div id="chart-container"></div>
+      </div>
+
+      <!-- Slider Control -->
+      <div class="slider-panel">
+        <div class="slider-label-row">
+          <span class="slider-instruction">Drag to set your starting year</span>
+          <span class="slider-year-display" id="sliderYearDisplay">1970</span>
+        </div>
+        <div class="slider-track-wrapper">
+          <input
+            type="range"
+            id="yearSlider"
+            min="1970"
+            max="2024"
+            value="1970"
+            step="1"
+          />
+        </div>
+        <div class="slider-endpoints">
+          <span>1970</span>
+          <span>2024</span>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <p>Gold prices in CAD (per troy oz) &middot; Data sourced from historical market records</p>
+    </footer>
+
+  </div>
+
+  <!-- Tooltip (rendered outside chart, managed by D3) -->
+  <div class="chart-tooltip" id="chartTooltip">
+    <div class="tooltip-year" id="tooltipYear"></div>
+    <div class="tooltip-price" id="tooltipPrice"></div>
+    <div class="tooltip-event" id="tooltipEvent"></div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="js/goldChart.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
