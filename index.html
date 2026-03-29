@@ -1,94 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>The Heirloom Calculator — Gold Appreciation</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Heirloom Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
 
-  <div class="page-wrapper">
+  <div class="grain" aria-hidden="true"></div>
 
-    <!-- Header -->
-    <header class="site-header">
-      <div class="header-ornament">&#10022;</div>
-      <h1 class="site-title">The Heirloom Calculator</h1>
-      <p class="site-subtitle">How gold endures — a study in lasting value</p>
-      <div class="header-rule"></div>
-    </header>
+  <div class="shell">
 
-    <!-- Main Content -->
-    <main class="main-content">
+    <!-- ══════════════════════════ LEFT PANEL ══════════════════════════ -->
+    <aside class="panel">
 
-      <!-- KPI Strip -->
-      <div class="kpi-strip" id="kpiStrip">
-        <div class="kpi-card">
-          <span class="kpi-label">Selected Period</span>
-          <span class="kpi-value" id="kpiPeriod">—</span>
+      <!-- Wordmark -->
+      <header class="panel__wordmark">
+        <div class="wordmark__glyph">✦</div>
+        <div>
+          <div class="wordmark__title">Heirloom</div>
+          <div class="wordmark__sub">Calculator</div>
         </div>
-        <div class="kpi-card kpi-card--accent">
-          <span class="kpi-label">Total Appreciation</span>
-          <span class="kpi-value" id="kpiGain">—</span>
+      </header>
+
+      <!-- ── Toggles ── -->
+      <section class="panel__section">
+        <p class="panel__eyebrow">View</p>
+
+        <div class="toggle-row">
+          <span class="toggle-label">Metal</span>
+          <div class="toggle-pill" id="metalToggle" role="switch" aria-checked="true" tabindex="0">
+            <div class="toggle-pill__track">
+              <span class="toggle-pill__opt toggle-pill__opt--left active" data-val="gold">Gold</span>
+              <span class="toggle-pill__opt toggle-pill__opt--right" data-val="silver">Silver</span>
+              <div class="toggle-pill__thumb"></div>
+            </div>
+          </div>
         </div>
-        <div class="kpi-card">
-          <span class="kpi-label">Price at Start</span>
-          <span class="kpi-value" id="kpiStart">—</span>
+
+        <div class="toggle-row" style="margin-top:12px">
+          <span class="toggle-label">Price</span>
+          <div class="toggle-pill" id="inflationToggle" role="switch" aria-checked="false" tabindex="0">
+            <div class="toggle-pill__track">
+              <span class="toggle-pill__opt toggle-pill__opt--left active" data-val="nominal">Nominal</span>
+              <span class="toggle-pill__opt toggle-pill__opt--right" data-val="adjusted">Adj.</span>
+              <div class="toggle-pill__thumb"></div>
+            </div>
+          </div>
         </div>
-        <div class="kpi-card">
-          <span class="kpi-label">Price at End</span>
-          <span class="kpi-value" id="kpiEnd">—</span>
+      </section>
+
+      <!-- ── Presets ── -->
+      <section class="panel__section">
+        <p class="panel__eyebrow">Jewelry Box</p>
+        <div class="preset-list">
+          <button class="preset-btn" data-year="1990" data-grams="12" data-purity="24k" data-metal="gold">
+            <span class="preset-btn__icon">○</span>
+            <span class="preset-btn__body">
+              <span class="preset-btn__name">Grandma's Bangle</span>
+              <span class="preset-btn__meta">24k · 12 g · Est. 1990</span>
+            </span>
+            <span class="preset-btn__arrow">›</span>
+          </button>
+          <button class="preset-btn" data-year="2000" data-grams="18" data-purity="18k" data-metal="gold">
+            <span class="preset-btn__icon">◇</span>
+            <span class="preset-btn__body">
+              <span class="preset-btn__name">Mom's 18k Set</span>
+              <span class="preset-btn__meta">18k · 18 g · Est. 2000</span>
+            </span>
+            <span class="preset-btn__arrow">›</span>
+          </button>
+          <button class="preset-btn" data-year="2011" data-grams="35" data-purity=".925" data-metal="silver">
+            <span class="preset-btn__icon">—</span>
+            <span class="preset-btn__body">
+              <span class="preset-btn__name">Silver Cuban Chain</span>
+              <span class="preset-btn__meta">.925 · 35 g · Est. 2011</span>
+            </span>
+            <span class="preset-btn__arrow">›</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ── Calculator Inputs ── -->
+      <section class="panel__section">
+        <p class="panel__eyebrow">Your Piece</p>
+        <div class="field-group">
+          <label class="field-label" for="gramWeight">Weight</label>
+          <div class="field-input-wrap">
+            <input type="number" id="gramWeight" class="field-input" value="10" min="0.1" max="2000" step="0.1"/>
+            <span class="field-unit">g</span>
+          </div>
+        </div>
+        <div class="field-group" style="margin-top:14px">
+          <label class="field-label" for="puritySelect">Purity</label>
+          <div class="field-select-wrap">
+            <select id="puritySelect" class="field-select">
+              <!-- Populated dynamically by populatePurityDropdown() -->
+            </select>
+            <svg class="field-chevron" width="10" height="6" viewBox="0 0 10 6">
+              <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Output Block ── -->
+      <section class="panel__section output-block">
+        <p class="panel__eyebrow">Valuation</p>
+
+        <div class="output-card output-card--primary">
+          <span class="output-card__label">Raw Material Value</span>
+          <span class="output-card__value" id="rawValue">—</span>
+          <span class="output-card__sub">CAD · spot rate</span>
+        </div>
+
+        <div class="output-card output-card--secondary">
+          <span class="output-card__label">Scrap Offer (est.)</span>
+          <span class="output-card__value output-card__value--dim" id="scrapValue">—</span>
+          <span class="output-card__sub">After refining &amp; dealer margin</span>
+        </div>
+
+        <div class="roi-badge" id="roiBadge">
+          <span class="roi-badge__pct" id="roiPct">—</span>
+          <span class="roi-badge__label">ROI since <span id="roiYear">—</span></span>
+        </div>
+      </section>
+
+      <!-- ── Year Slider ── -->
+      <section class="panel__section slider-section">
+        <div class="slider-header">
+          <p class="panel__eyebrow" style="margin:0">Acquisition Year</p>
+          <span class="slider-pill" id="sliderPill">—</span>
+        </div>
+        <input type="range" id="yearSlider" class="year-slider" min="1970" max="2026" value="1970" step="1"/>
+        <div class="slider-bounds">
+          <span id="sliderBoundMin">—</span>
+          <span id="sliderBoundMax">—</span>
+        </div>
+      </section>
+
+      <footer class="panel__footer">
+        Prices in CAD · Per troy oz · Historical data
+      </footer>
+    </aside>
+
+    <!-- ══════════════════════════ RIGHT PANEL ══════════════════════════ -->
+    <main class="canvas">
+      <div class="canvas__header">
+        <div>
+          <h1 class="canvas__title">Price History</h1>
+          <p class="canvas__sub" id="chartSub">Gold · Nominal CAD per troy oz</p>
+        </div>
+        <div class="chart-legend">
+          <div class="legend-item" id="legendLine">
+            <div class="legend-swatch" id="legendSwatch"></div>
+            <span id="legendText">Gold</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-swatch legend-swatch--crisis"></div>
+            <span>Crisis</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-swatch legend-swatch--sweep"></div>
+            <span>Your Period</span>
+          </div>
         </div>
       </div>
-
-      <!-- Chart Container -->
-      <div class="chart-shell">
-        <div id="chart-container"></div>
-      </div>
-
-      <!-- Slider Control -->
-      <div class="slider-panel">
-        <div class="slider-label-row">
-          <span class="slider-instruction">Drag to set your starting year</span>
-          <span class="slider-year-display" id="sliderYearDisplay">1970</span>
-        </div>
-        <div class="slider-track-wrapper">
-          <input
-            type="range"
-            id="yearSlider"
-            min="1970"
-            max="2024"
-            value="1970"
-            step="1"
-          />
-        </div>
-        <div class="slider-endpoints">
-          <span>1970</span>
-          <span>2024</span>
-        </div>
-      </div>
-
+      <div id="chartContainer" class="chart-container"></div>
     </main>
-
-    <!-- Footer -->
-    <footer class="site-footer">
-      <p>Gold prices in CAD (per troy oz) &middot; Data sourced from historical market records</p>
-    </footer>
 
   </div>
 
-  <!-- Tooltip (rendered outside chart, managed by D3) -->
-  <div class="chart-tooltip" id="chartTooltip">
-    <div class="tooltip-year" id="tooltipYear"></div>
-    <div class="tooltip-price" id="tooltipPrice"></div>
-    <div class="tooltip-event" id="tooltipEvent"></div>
+  <!-- Floating tooltip -->
+  <div class="float-tip" id="floatTip">
+    <div class="float-tip__year" id="tipYear"></div>
+    <div class="float-tip__price" id="tipPrice"></div>
+    <div class="float-tip__event" id="tipEvent"></div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
-  <script src="js/goldChart.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/dashboard.js"></script>
 </body>
 </html>
